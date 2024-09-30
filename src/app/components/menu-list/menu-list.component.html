@@ -1,0 +1,48 @@
+<div class="container mx-auto px-4 py-6">
+  <h2 class="text-3xl font-semibold mb-4">Menu List</h2>
+  <a routerLink="/menus/create"
+     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6 inline-block">
+    Add New Menu
+  </a>
+
+  @if (error) {
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      {{ error }}
+    </div>
+  }
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Name</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Price</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Taste</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Is Drink</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Ingredients</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Number of Sales</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (menu of menus; track menu?._id) {
+          <tr class="border-b">
+            <td class="px-6 py-4 text-sm text-gray-700">{{ menu.name }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ menu.price | currency }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ menu.taste }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ menu.is_drink ? 'Yes' : 'No' }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ menu.ingredients.join(', ') }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ menu.num_sales }}</td>
+            <td class="px-6 py-4 flex gap-2">
+              <a [routerLink]="['/menus/edit', menu._id]"
+                 class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-1 px-3 rounded text-xs">Edit</a>
+              <button (click)="deleteMenu(menu._id!)"
+                      class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded text-xs">Delete
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

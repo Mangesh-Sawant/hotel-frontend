@@ -1,0 +1,81 @@
+@if (menu) {
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-semibold mb-4">Edit Menu Item</h2>
+    <form (ngSubmit)="onSubmit()" #menuForm="ngForm" class="bg-white shadow-md rounded-lg p-6">
+
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+               [(ngModel)]="menu.name" name="name" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+        <input type="number" id="price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+               [(ngModel)]="menu.price" name="price" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="taste" class="block text-sm font-medium text-gray-700">Taste</label>
+        <select id="taste" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+                [(ngModel)]="menu.taste" name="taste" required>
+          <option value="sweet">Sweet</option>
+          <option value="spicy">Spicy</option>
+          <option value="sour">Sour</option>
+        </select>
+      </div>
+
+      <div class="mb-4 flex items-center">
+        <input type="checkbox" id="is_drink" class="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+               [(ngModel)]="menu.is_drink" name="is_drink">
+        <label for="is_drink" class="text-sm font-medium text-gray-700">Is Drink</label>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Ingredients</label>
+        <div class="flex items-center">
+          <input type="text" id="ingredient" #ingredientInput class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+                 placeholder="Add an ingredient">
+          <button type="button" class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded ml-2"
+                  (click)="addIngredient(ingredientInput.value); ingredientInput.value=''">Add Ingredient
+          </button>
+        </div>
+        <ul class="mt-2">
+          @for (ingredient of menu.ingredients; track ingredient) {
+            <li class="bg-gray-100 border-b border-gray-300 flex justify-between items-center px-4 py-2">
+              {{ ingredient }}
+              <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded text-xs"
+                      (click)="removeIngredient(ingredient)">
+                Remove
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="mb-4">
+        <label for="num_sales" class="block text-sm font-medium text-gray-700">Number of Sales</label>
+        <input type="number" id="num_sales" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+               [(ngModel)]="menu.num_sales" name="num_sales">
+      </div>
+
+      <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              [disabled]="!menuForm.form.valid">Update</button>
+      <a routerLink="/menus" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">Cancel</a>
+
+      @if (error) {
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+          {{ error }}
+        </div>
+      }
+    </form>
+  </div>
+}
+
+@if (error && !menu) {
+  <div class="container mx-auto px-4 py-6">
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      {{ error }}
+    </div>
+  </div>
+}

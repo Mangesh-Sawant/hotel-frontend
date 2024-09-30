@@ -1,0 +1,81 @@
+@if (person) {
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-3xl font-semibold mb-4">Edit Person</h2>
+
+    <!-- Form for editing person -->
+    <form (ngSubmit)="onSubmit()" #personForm="ngForm" class="space-y-6 bg-white p-6 shadow-md rounded-lg">
+
+      <!-- Name Field -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.name" name="name" required>
+      </div>
+
+      <!-- Age Field -->
+      <div>
+        <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+        <input type="number" id="age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.age" name="age" required>
+      </div>
+
+      <!-- Work Field -->
+      <div>
+        <label for="work" class="block text-sm font-medium text-gray-700">Work</label>
+        <select id="work" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.work" name="work" required>
+          <option value="chef">Chef</option>
+          <option value="waiter">Waiter</option>
+          <option value="manager">Manager</option>
+        </select>
+      </div>
+
+      <!-- Mobile Field -->
+      <div>
+        <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile</label>
+        <input type="text" id="mobile" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.mobile" name="mobile" required>
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.email" name="email" required>
+      </div>
+
+      <!-- Address Field -->
+      <div>
+        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+        <input type="text" id="address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.address" name="address" required>
+      </div>
+
+      <!-- Salary Field -->
+      <div>
+        <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
+        <input type="text" id="salary" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" [(ngModel)]="person.salary" name="salary" required>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex items-center space-x-4">
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded disabled:opacity-50" [disabled]="!personForm.form.valid">
+          Update
+        </button>
+        <a routerLink="/persons" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+          Cancel
+        </a>
+      </div>
+
+      <!-- Error Message -->
+      @if (error) {
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+          {{ error }}
+        </div>
+      }
+    </form>
+  </div>
+
+  <!-- Error when no person -->
+  @if (error && !person) {
+    <div class="container mx-auto px-4 py-6">
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        {{ error }}
+      </div>
+    </div>
+  }
+}

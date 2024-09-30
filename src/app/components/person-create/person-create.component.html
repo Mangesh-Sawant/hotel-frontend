@@ -1,0 +1,62 @@
+<div class="container mx-auto px-4 py-6 max-w-md">
+  <h2 class="text-3xl font-semibold mb-4">Create New Person</h2>
+  <form (ngSubmit)="onSubmit()" #personForm="ngForm" class="bg-white shadow-md rounded-lg p-6">
+
+    <div class="mb-4">
+      <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+      <input type="text" id="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+             [(ngModel)]="person.name" name="name" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+      <input type="number" id="age" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+             [(ngModel)]="person.age" name="age" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="work" class="block text-sm font-medium text-gray-700">Work</label>
+      <select id="work" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+              [(ngModel)]="person.work" name="work" required>
+        <option value="chef">Chef</option>
+        <option value="waiter">Waiter</option>
+        <option value="manager">Manager</option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile</label>
+      <input type="text" id="mobile" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+             [(ngModel)]="person.mobile" name="mobile" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+      <input type="email" id="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+             [(ngModel)]="person.email" name="email" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+      <input type="text" id="address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+             [(ngModel)]="person.address" name="address" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="salary" class="block text-sm font-medium text-gray-700">Salary</label>
+      <input type="text" id="salary" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-200"
+             [(ngModel)]="person.salary" name="salary" required>
+    </div>
+
+    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            [disabled]="!personForm.form.valid">Create</button>
+    <a routerLink="/persons" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">Cancel</a>
+
+    @if (error) {
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+        {{ error }}
+      </div>
+    }
+
+  </form>
+</div>

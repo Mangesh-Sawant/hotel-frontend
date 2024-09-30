@@ -1,0 +1,50 @@
+<div class="container mx-auto px-4 py-6">
+  <h2 class="text-3xl font-semibold mb-4">Person List</h2>
+  <a routerLink="/persons/create"
+     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6 inline-block">
+    Add New Person
+  </a>
+
+  @if (error) {
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      {{ error }}
+    </div>
+  }
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Name</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Age</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Work</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Mobile</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Email</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Address</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Salary</th>
+        <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (person of persons; track person?._id) {
+          <tr class="border-b">
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.name }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.age }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.work }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.mobile }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.email }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.address }}</td>
+            <td class="px-6 py-4 text-sm text-gray-700">{{ person.salary }}</td>
+            <td class="px-6 py-4 flex gap-2">
+              <a [routerLink]="['/persons/edit', person._id]"
+                 class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-1 px-3 rounded text-xs">Edit</a>
+              <button (click)="deletePerson(person._id!)"
+                      class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded text-xs">Delete
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
